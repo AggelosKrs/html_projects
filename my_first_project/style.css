@@ -1,0 +1,634 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial;
+}
+
+.navbar{
+    background: #eeece0;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;
+    height: 80px;
+    z-index: 1;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    pad: 0 50px;
+}
+
+#navbar__logo{
+    font-weight: bold;
+    background-color: #2b2e8a;
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 1.6rem;
+}
+
+.fa-gem {
+    margin-right: 0.5rem;
+
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar__item {
+    height: 80px;
+}
+
+.navbar__links {
+    color: #2b2e8a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+}
+
+.navbar__links:hover {
+    color: #9ac53b;
+    transition: all 0.3s ease;
+}
+
+@media screen and (max-width: 1300px){
+    .navbar__container {
+        display: flex;
+        justify-content: space-between;
+        height: 80px;
+        z-index: 1;
+        width: 100%;
+        max-width: 1300px;
+        padding: 0;
+    }
+
+    .navbar__menu{
+        display: grid;
+        grid-template-columns: auto;
+        margin: 0;
+        width: 100%;
+        position: absolute;
+        opacity: 0;
+        top: -1000px;
+        transition: all 0.5s ease;
+        height: 50vh;
+        z-index: -1;
+        background: #eeece0;
+    }
+
+    .navbar__menu.active {
+        top: 100%;
+        opacity: 1;
+        transition: all 0.5s ease;
+        z-index: 99;
+        height: 50vh;
+        font-size: 1.6rem;
+        background: #eeece0;
+    }
+
+    #navbar__logo{
+        padding-left: 50px;
+    }
+
+    .navbar__toggle .bar {
+        width: 25px;
+        height: 4px;
+        margin: 3px auto;
+        transition: all 0.3s ease-in-out;
+        background: #2b2e8a;
+    }
+
+    .navbar__item{
+        width: 100%;
+    }
+
+    .navbar__links{
+        text-align: center;
+        padding: 2rem;
+        width: 100%;
+        display: table;
+    }
+
+    #mobile-menu {
+        position: absolute;
+        top: 20%;
+        right: 5%;
+        transform: translate(5%, 20%);
+    }
+
+    .navbar__toggle .bar {
+        display: block;
+        cursor: pointer;
+    }
+
+    #mobile-menu.is-activer .bar:nth-child(2) {
+        opacity: 0 ;
+    }
+
+    #mobile-menu.is-activer .bar:nth-child(1) {
+        transform: translate(8px) rotate(45deg);
+    }
+
+    #mobile-menu.is-activer .bar:nth-child(3) {
+        transform: translate(-8px) rotate(-45deg);
+    }
+}
+/*-------------------------------------------------------------------------*/
+
+.main {
+    background-color: white; /* Ή το off-white σου */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* height: 50vh; <--- ΑΦΑΙΡΕΣΕ ΑΥΤΟ! */
+    min-height: 50vh; /* Το .main θα έχει τουλάχιστον 50vh, αλλά μπορεί να μεγαλώσει */
+    position: relative;
+    /* Μπορείς να προσθέσεις padding εδώ αν θες το κείμενο να μην κολλάει στις άκρες */
+    padding: 2rem 0; /* Προσθέτει padding πάνω-κάτω στο .main container */
+}
+
+.main__content {
+    position: relative;
+    z-index: 1;
+    /* padding: 2rem; <--- Μπορείς να αφαιρέσεις αυτό το padding αν το έβαλες στο .main */
+    /* Ή ρύθμισε το padding εδώ για να ελέγχεις τον χώρο μέσα στο ίδιο το κείμενο */
+    padding: 0 1rem; /* Μικρότερο padding αριστερά/δεξιά */
+    width: 100%;
+    max-width: 800px;
+}
+.main__content p {
+    background-color: white;
+    height: 100%;
+    /*background-image: linear-gradient(to top, #2b2e8a 0%, #9ac53b 100%);*/
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: transparent;
+    font-size: 6rem;
+    font-weight: 800;
+    transform: translateY(20px); /* Ξεκινάει λίγο πιο κάτω */
+animation-fill-mode: forwards; /* Κρατάει την τελική κατάσταση του animation */
+animation-name: fadeInSlideUp;
+animation-duration: 0.8s; /* Διάρκεια κάθε animation */
+animation-timing-function: ease-out; /* Ομαλή μετάβαση */
+}
+
+.background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Θα καλύπτει το 100% του ύψους του .main (που τώρα είναι δυναμικό) */
+    object-fit: cover;
+    z-index: 0;
+    -webkit-mask: no-repeat;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+}
+
+.info{
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    background-color: #eeece0;
+}
+
+.info p{
+    color: #2b2e8a;
+}
+.info p{
+    font-size: 50px;
+    transform: translateY(20px); /* Ξεκινάει λίγο πιο κάτω */
+    animation-fill-mode: forwards; /* Κρατάει την τελική κατάσταση του animation */
+    animation-name: fadeInSlideUp;
+    animation-duration: 0.8s; /* Διάρκεια κάθε animation */
+    animation-timing-function: ease-out; /* Ομαλή μετάβαση */
+}
+
+ .about__company {
+    width: 100%;
+    height: auto;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #2b2e8a;
+    padding: 2rem;
+    transform: translateY(20px); /* Ξεκινάει λίγο πιο κάτω */
+animation-fill-mode: forwards; /* Κρατάει την τελική κατάσταση του animation */
+animation-name: fadeInSlideUp;
+animation-duration: 0.8s; /* Διάρκεια κάθε animation */
+animation-timing-function: ease-out; /* Ομαλή μετάβαση */
+ }
+
+ .about__company h2 {
+    font-size: 60px;
+    color: whitesmoke;
+ }
+
+ .company p {
+    color: whitesmoke;
+    font-size: 20px;
+ }
+
+
+/* For mobile load */
+
+@media screen and (max-width: 768px) {
+
+    .main {
+        height: auto;
+        padding: 4rem 2rem;
+    }
+
+    .main__container {
+        display: grid;
+        grid-template-columns: auto;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+        height: 90vh;
+    }
+
+    .about__company h2 {
+        font-size: 30px;
+        color: whitesmoke;
+     }
+
+    .main__content{
+        text-align: center;
+       /* margin-bottom: 4rem;*/
+    }
+
+    .main__content p {
+        font-size: 2.5rem; /* Ένα πιο λογικό μέγεθος για κινητά */
+    }
+
+    .dashboard__container{
+        display: flex;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr;
+     }
+
+}
+
+@media screen and (max-width: 480px) {
+
+    .main {
+        height: auto;
+        padding: 2rem 1rem;
+    }
+
+    .main__content p {
+        margin-top: 2rem;
+        font-size: 1.5rem;
+    }
+}
+
+/* Servicies section*/
+
+.services {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 15px;
+    transform: translateY(20px); /* Ξεκινάει λίγο πιο κάτω */
+animation-fill-mode: forwards; /* Κρατάει την τελική κατάσταση του animation */
+animation-name: fadeInSlideUp;
+animation-duration: 0.8s; /* Διάρκεια κάθε animation */
+animation-timing-function: ease-out; /* Ομαλή μετάβαση */
+}
+
+.services h1 {
+    font-size: 50px;
+    margin: 30px;
+
+    background-color: #2b2e8a;
+    background-image: linear-gradient(to top, #2b2e8a 0%, #9ac53b 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: transparent;
+}
+
+.services p {
+    font-size: 20px;
+    background-image: linear-gradient(to top, #2b2e8a 0%, #9ac53b 100%);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: transparent;
+    text-align: center;
+}
+.services__wrapper{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center; 
+}
+.services__wrapper h2 {
+    text-align: center;
+}
+
+.services__card--commerce,
+.services__card--oil,
+.services__card--industry,
+.services__card--construction {
+    margin: 10px;
+    height: 425px;
+    width: 300px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-image: linear-gradient(to top, #2b2e8a 0%, #9ac53b 100%);
+    background-size: cover;
+    background-position: center;
+    transition: 0.3 ease-in;
+}
+.services__card--commerce {
+    background-image: url(images/commerce-min.jpg);
+}
+.services__card--oil {
+    background-image: url(images/oil\,gas\ &\ energy-min.jpg);
+}
+
+.services__card--industry {
+    background-image: url(images/industry-min.jpg);
+}
+.services__card--construction {
+    background-image: url(images/construction-min.jpg);
+}
+
+.services__btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 0px;
+    
+}
+
+.services__card--commerce button,
+.services__card--oil button,
+.services__card--industry button,
+.services__card--construction button {
+    cursor: pointer;
+    color: white;
+    background-color: #9ac53b;
+    padding: 14px 24px;
+    border: none;
+    outline: none;
+    border-radius:  18px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.services__btn {
+    color: white;
+    background-color: #9ac53b;
+    outline: none;
+    position: relative;
+    border: none;
+    border-radius: 18px;
+}
+
+.services__btn a{
+    position: relative;
+    color:whitesmoke;
+    text-decoration: none;
+    font-size: 20px;
+    z-index: 2;
+}
+
+.services__btn:hover::after {
+    width: 100%;
+}
+
+.services__btn::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: #2b2e8a;
+    color: whitesmoke;
+    transition: all 0.5s;
+    border-radius: 18px;
+}
+
+.services__card--commerce:hover,
+.services__card--oil:hover,
+.services__card--industry:hover,
+.services__card--construction:hover {
+    transform: scale(1.085);
+    transition: 0.5s ease-in;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1300px) {
+    .services__wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .services h1 {
+        font-size: 28px;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .services__card--commerce,
+.services__card--oil,
+.services__card--industry,
+.services__card--construction {
+        height: 325px;
+        width: 150px;
+    }
+
+    .services__btn {
+        margin-top: 10px;
+    }
+
+    .services__card button {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .services__wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .services h1 {
+        font-size: 28px;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .services__card--commerce,
+.services__card--oil,
+.services__card--industry,
+.services__card--construction {
+        height: 325px;
+        width: 150px;
+    }
+
+    .services__btn {
+        margin-top: 10px;
+    }
+
+    .services__card button {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+}
+
+@media (max-width: 430px) {
+    .services__wrapper {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .services h1 {
+        font-size: 28px;
+        text-align: center;
+        margin: 10px 0;
+    }
+
+    .services__card {
+        height: 325px;
+        width: 150px;
+    }
+
+    .services__btn {
+        margin-top: 10px;
+    }
+
+    .services__card button {
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 16px;
+    }
+}
+/* At glance, Vision, International, Technology */
+
+/* Upcoming events*/
+
+/* Footer */
+
+.footer-basic {
+    padding: 50px;
+    background-color:#eeece0;
+    color:#2b2e8a;
+  }
+  
+  .footer-basic ul {
+    padding:0;
+    list-style:none;
+    text-align:center;
+    font-size:18px;
+    line-height:1.6;
+    margin-bottom:0;
+  }
+  
+  .footer-basic li {
+    padding:0 10px;
+  }
+  
+  .footer-basic ul a {
+    color:inherit;
+    text-decoration:none;
+    opacity:0.8;
+  }
+  
+  .footer-basic ul a:hover {
+    opacity:1;
+  }
+  
+  .footer-basic .social {
+    text-align:center;
+    padding-bottom:25px;
+  }
+  
+  .footer-basic .social > a {
+    font-size:24px;
+    width:40px;
+    height:40px;
+    line-height:40px;
+    display:inline-block;
+    text-align:center;
+    border-radius:50%;
+    border:1px solid #ccc;
+    margin:0 8px;
+    color:inherit;
+    opacity:0.75;
+  }
+  .footer-basic .copyright {
+    margin-top:15px;
+    text-align:center;
+    font-size:13px;
+    color:#2b2e8a;
+    margin-bottom:0;
+  }
+  
+  .footer-basic img {
+    padding: flex;
+    align-items: center;
+    justify-content: center;
+  }
+/*Remember*/
+
+/*
+transform: translateY(20px); Ξεκινάει λίγο πιο κάτω 
+animation-fill-mode: forwards; Κρατάει την τελική κατάσταση του animation
+animation-name: fadeInSlideUp;
+animation-duration: 0.8s;  Διάρκεια κάθε animation 
+animation-timing-function: ease-out; Ομαλή μετάβαση 
+*/
+.animated-text.delay-1 { animation-delay: 0.5s; }
+.animated-text.delay-2 { animation-delay: 1.2s; }
+.animated-text.delay-3 { animation-delay: 1.9s; }
+.animated-text.delay-4 { animation-delay: 2.6s; }
+
+@keyframes fadeInSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
